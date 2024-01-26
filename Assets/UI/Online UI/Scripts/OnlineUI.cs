@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using Mirror;
 
 public class OnlineUI : MonoBehaviour
 {
@@ -15,6 +16,19 @@ public class OnlineUI : MonoBehaviour
             PlayerSettings.nickname = nicknameInputField.text;
             createRoomUI.SetActive(true);
             gameObject.SetActive(false);
+        }
+        else
+        {
+            nicknameInputField.GetComponent<Animator>().SetTrigger("on");
+        }
+    }
+
+    public void OnClickEnterGameRoomButton()
+    {
+        if (nicknameInputField.text != "")
+        {
+            var manager = AmongUsRoomManager.singleton;
+            manager.StartClient();
         }
         else
         {
